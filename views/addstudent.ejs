@@ -3,6 +3,55 @@
     <%- include('./particle/head.ejs') %>
 <body>
     <%- include('./particle/header.ejs') %>
-    Add sudent
+    <main class="container-fluid">
+        <div class="row normal-font">
+            <form action="/addstudent" method="post" class="col-10 offset-1 tablestart container-fluid">
+                <div class="row py-3">
+                    <label for="secondname" class="col-3 text-center offset-1">Фамилия</label><input type="text" name="secondname" class="col-3 offset-4">
+                </div>
+                <div class="row py-3">
+                    <label for="firstname" class="col-3 text-center offset-1">Имя</label><input type="text" name="firstname" class="col-3 offset-4">
+                </div>
+                <div class="row py-3">
+                    <label for="phone" class="col-3 text-center offset-1">Телефон</label><input type="tel" name="phone" class="col-3 offset-4">
+                </div>
+                <div class="row py-3">
+                    <label for="course" class="col-3 text-center offset-1">Курс</label>
+                    <select id="course" name="course" class="col-3 offset-4">
+                        <option value="compyuter">Компьютер</option>
+                        <option value="nurse">Хамширалик</option>
+                        <option value="Massage">Массаж</option>
+                        <option value="Cooking">Кандолатчилик</option>
+                        <option value="arab">Араб тили</option>
+                        <option value="sewing">Тикувчилик</option>
+                        <option value="knitting">Токиш</option>
+                        <option value="russ">Русс тили</option>
+                        <option value="etc">Бошка вариант</option>
+                      </select>
+                </div>
+                <div class="row py-3">
+                    <label for="adv" class="col-3 text-center offset-1">Реклама</label>
+                    <select id="adv" name="adv" class="col-3 offset-4">
+                        <option value="familiar">Таниш</option>
+                        <option value="banner">Баннер</option>
+                        <option value="instagramm">Instagram</option>
+                        <option value="youtube">YouTube</option>
+                        <option value="telegramm">Telegramm</option>
+                        <option value="flyer">Флаер</option>
+                        <option value="etc">Бошка вариант</option>
+                    </select>
+                </div>
+                <div class="row py-3">
+                    <label for="adress" class="col-3 text-center offset-1">Адресс</label><input type="text" name="adress" class="col-3 offset-4">
+                </div>
+                <div class="row py-3">
+                    <input type="submit" value="Saqlash" class="offset-4 col-4 p-2">
+                </div>
+                
+                
+                
+            </form>
+        </div>
+    </main>
 </body>
 </html>

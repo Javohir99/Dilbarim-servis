@@ -14,8 +14,22 @@
     --border-secondory-color:#555;
     --bg-color:rgba(169, 0, 172, 0.25);
 }
+::-webkit-scrollbar{
+    width: 10px;
+}
+::-webkit-scrollbar-track{
+    background-color: var(--basic-color);
+}
+::-webkit-scrollbar-thumb{
+    border-radius: 5px;
+    background-color: var(--select);
+}
+.normal-font{
+    font-size: 20px;
+}
 header{
     font-size: 2rem;
+    font-size: 32px;
     background-color: var(--basic-color);
 }
 header nav{
@@ -42,10 +56,8 @@ h1{
 .thead{
     margin: 26px 0px 51px 0px;
     font-weight: bold;
-    font-size: 20px;
 }
 .tr{
-    font-size: 20px;
     margin: 0px 0px 10px 0px;
     padding-bottom: 10px;
     border-bottom: 1px solid var(--border-secondory-color);
@@ -67,7 +79,7 @@ h1{
     bottom: 20px;
 }
 .clock{
- text-align: center;
+    text-align: center;
     font-size: 4rem;
 }
 .date{

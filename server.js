@@ -3,6 +3,8 @@ const path = require('path');
 const app = express();
 const port = 3000;
 
+app.set('veiw engine','ejs');
+
 const CreatePath = (file) => path.resolve(__dirname,'views',file + '.ejs');  
 app.use(express.static('style'));
 app.use(express.static('script'));
