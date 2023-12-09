@@ -1,6 +1,7 @@
 const telephone = document.querySelector('#phone');
 const adv = document.querySelector('#adv');
 const course = document.querySelector('#course');
+
 function etc(event){
     const area = event.target;
     if(area.value == 'etc'){
@@ -12,6 +13,7 @@ function etc(event){
             label.classList.add('col-3','text-center','offset-1');
             input.classList.add('col-3','offset-4');
 
+            input.name = area.name + 'etc';
             label.innerHTML = '<i>'+area.previousElementSibling.innerHTML+'</i>';
 
             input.setAttribute('type','text');
@@ -26,12 +28,14 @@ function etc(event){
         }
     }
 }
+
 adv.addEventListener('change',etc);
 course.addEventListener('change',etc);
 
 telephone.addEventListener('focus',()=>{
     telephone.value = '+998 (';
 });
+
 telephone.addEventListener('input',()=>{
     switch(telephone.value.length){
         case 8:
@@ -44,4 +48,7 @@ telephone.addEventListener('input',()=>{
             telephone.value = telephone.value + '-';
             break;
     }
-})
+});
+
+
+
