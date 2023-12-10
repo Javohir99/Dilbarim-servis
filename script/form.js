@@ -1,6 +1,29 @@
 const telephone = document.querySelector('#phone');
 const adv = document.querySelector('#adv');
 const course = document.querySelector('#course');
+/* нужно проработать маску для телефоных номеров*/
+const mask = '+998 (__) ___-__-__';
+
+adv.addEventListener('change',etc);
+course.addEventListener('change',etc);
+
+telephone.addEventListener('focus',()=>{
+    telephone.value = '+998 (';
+});
+
+telephone.addEventListener('input',()=>{
+    switch(telephone.value.length){
+        case 8:
+            telephone.value = value = telephone.value + ') ';
+        break;
+        case 13:
+            telephone.value = telephone.value + '-';
+            break;
+        case 16:
+            telephone.value = telephone.value + '-';
+            break;
+    }
+});
 
 function etc(event){
     const area = event.target;
@@ -29,26 +52,9 @@ function etc(event){
     }
 }
 
-adv.addEventListener('change',etc);
-course.addEventListener('change',etc);
+function rest(){
 
-telephone.addEventListener('focus',()=>{
-    telephone.value = '+998 (';
-});
+}
+function empty(){
 
-telephone.addEventListener('input',()=>{
-    switch(telephone.value.length){
-        case 8:
-            telephone.value = value = telephone.value + ') ';
-        break;
-        case 13:
-            telephone.value = telephone.value + '-';
-            break;
-        case 16:
-            telephone.value = telephone.value + '-';
-            break;
-    }
-});
-
-
-
+}
