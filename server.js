@@ -2,23 +2,23 @@ const express = require('express');
 const path = require('path');
 const app = express();
 const fs = require('fs');
-
+const JSONKA = `[{"secondname":"Shavkatov","firstname":"Javoxir","phone":"+998 (94) 608-24-42","course":"compyuter","adv":"familiar","adress":"Farobiy"}]`;
+const obj = JSON.parse(JSONKA);
 const PORT = 3000;
 
 app.set('veiw engine','ejs');
 
 /*logic error не проработан*/
+
 const CreatePath = (file) => path.resolve(__dirname,'views',file + '.ejs');
+
 const WriteDate = (date)=>{
-    fs.open('./date/student.json','w',(err,fd)=>{
-        if(err)console.log(err);
-        fs.write(fd,date,(err,written,buffer)=>{
-            if(err)console.log(err);
-        })
-        /*fs.read(fd,(err,bytesRead,DBdate)=>{            
-            if(err)console.log(err);
-            
-        });*/
+    fs.open('./date/student.json','r+',(err,fd)=>{
+        fs.read(fd,(err,bytes,DBdate)=>{
+            const JSONKApizdec = DBdate.toString() + '';
+            const DABBA = JSON.parse(JSONKApizdec);
+            console.log(DABBA);
+        });
     });
 }
 
