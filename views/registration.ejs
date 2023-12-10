@@ -13,41 +13,17 @@
                     <div class="col-2 text-center">Реклама</div>
                     <div class="col-2 text-center">Сана</div>
                 </div>
-                <div class="row tr">
-                    <div class="col-3 text-center">Шавкатов Жавохир</div>
-                    <div class="col-3 text-center">Хамширалик</div>
-                    <div class="col-2 text-center">(94) 608-24-42</div>
-                    <div class="col-2 text-center">Инста</div>
-                    <div class="col-2 text-center">01.12.2023<input type="checkbox"></div>
-                </div>
-                <div class="row tr">
-                    <div class="col-3 text-center">Анваров Хусоюн</div>
-                    <div class="col-3 text-center">Массаж</div>
-                    <div class="col-2 text-center">(94) 608-24-42</div>
-                    <div class="col-2 text-center">Телег</div>
-                    <div class="col-2 text-center">01.12.2023<input type="checkbox"></div>
-                </div>
-                <div class="row tr">
-                    <div class="col-3 text-center">Акбаров Жасур</div>
-                    <div class="col-3 text-center">Тикувчилик</div>
-                    <div class="col-2 text-center">(94) 608-24-42</div>
-                    <div class="col-2 text-center">Таниш</div>
-                    <div class="col-2 text-center">01.12.2023<input type="checkbox"></div>
-                </div>
-                <div class="row tr">
-                    <div class="col-3 text-center">Юлдашев Фазлиддин</div>
-                    <div class="col-3 text-center">Кандолатчилик</div>
-                    <div class="col-2 text-center">(94) 608-24-42</div>
-                    <div class="col-2 text-center">Ютуб</div>
-                    <div class="col-2 text-center">01.12.2023<input type="checkbox"></div>
-                </div>
-                <div class="row tr">
-                    <div class="col-3 text-center">Рихсибоев Абдурахмон</div>
-                    <div class="col-3 text-center">Бухгалтерия</div>
-                    <div class="col-2 text-center">(94) 608-24-42</div>
-                    <div class="col-2 text-center">Банер</div>
-                    <div class="col-2 text-center">01.12.2023<input type="checkbox"></div>
-                </div>
+                <% if(date.students){ %>
+                    <% date.students.forEach((student)=>{ %>
+                    <div class="row tr">
+                        <div class="col-3 text-center"><%= student.secondname + " " + student.firstname %></div>
+                        <div class="col-3 text-center"><%= student.course %></div>
+                        <div class="col-2 text-center"><%= student.phone.slice(5) %></div>
+                        <div class="col-2 text-center"><%= student.adv %></div>
+                        <div class="col-2 text-center"><%= student.data.slice(0,10) %><input type="checkbox"></div>
+                    </div>
+                    <% }) %>
+                <% } %>
             </div>
         </div>
     </main>
