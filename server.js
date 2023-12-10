@@ -13,13 +13,40 @@ app.set('veiw engine','ejs');
 const CreatePath = (file) => path.resolve(__dirname,'views',file + '.ejs');
 
 const WriteDate = (date)=>{
-    fs.open('./date/student.json','r+',(err,fd)=>{
-        fs.read(fd,(err,bytes,DBdate)=>{
-            const JSONKApizdec = DBdate.toString() + '';
-            const DABBA = JSON.parse(JSONKApizdec);
-            console.log(DABBA);
+    fs.open('./date/student.json', 'r+', (err, fd) => {
+        if (err) {
+          console.error(err);
+          return;
+        }
+      
+        fs.read(fd, (err, bytesRead, buffer) => {
+        console.log(buffer.toString());
+          if (err) {
+            console.error(err);
+            return;
+          }
+      
+          const content = buffer.slice(0, bytesRead).toString();
+          const jsonData = JSON.parse(content);
+          jsonData.student.push(date);
+          const updatedContent = JSON.stringify(jsonData);
+      
+          fs.write(fd, updatedContent,0,(err, bytesWritten, buffer) => {
+            if (err) {
+              console.error(err);
+              return;
+            }
+      
+            fs.close(fd, (err) => {
+              if (err) {
+                console.error(err);
+                return;
+              }
+              console.log('Файл успешно закрыт.');
+            });
+          });
         });
-    });
+      });
 }
 
 app.use(express.static('style'));
