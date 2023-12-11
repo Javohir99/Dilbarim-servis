@@ -2,7 +2,7 @@ const express = require('express');
 const path = require('path');
 const app = express();
 const DB = require('./DB.js');
-const PORT = 2222;
+const PORT = 3000;
 
 app.set('veiw engine','ejs');
 

@@ -7,6 +7,22 @@ const secondname = document.querySelector('#secondname');
 const firstname = document.querySelector('#firstname');
 const form = document.querySelector('#form');
 const checker = document.querySelector('#checker');
+const success = document.querySelector('#success');
+const change = document.querySelector('#change');
+const check = {
+    firstname:document.querySelector('#check-firstname'),
+    secondname:document.querySelector('#check-secondname'),
+    address:document.querySelector('#check-adress'),
+    course:document.querySelector('#check-course'),
+    telephone:document.querySelector('#check-phone'),
+    adv:document.querySelector('#check-adv'),
+    checketc:function(block){
+        if(block.value === 'etc'){
+            return block.parentElement.nextElementSibling.querySelector('input').value;
+        }
+        return block.value;
+    }
+}
 console.log(form);
 
 /* нужно проработать маску для телефоных номеров*/
@@ -15,10 +31,17 @@ const mask = '+998 (__) ___-__-__';
 adv.addEventListener('change',etc);
 course.addEventListener('change',etc);
 submit.addEventListener('click',checkinput);
+
+
 telephone.addEventListener('focus',()=>{
     telephone.value = '+998 (';
 });
-
+success.addEventListener('click',()=>{
+    form.submit();
+});
+change.addEventListener('click',()=>{
+    checker.style.display = 'none';
+});
 telephone.addEventListener('input',()=>{
     switch(telephone.value.length){
         case 8:
@@ -32,6 +55,7 @@ telephone.addEventListener('input',()=>{
             break;
     }
 });
+
 
 function etc(event){
     const area = event.target;
@@ -59,7 +83,6 @@ function etc(event){
         }
     }
 }
-
 function rest(){
 
 }
@@ -83,6 +106,12 @@ function empty(block){
 function checkinput(){
     if(empty(telephone) & empty(address) & empty(secondname) & empty(firstname)){
         console.log('form sucsses');
-        checker.style.display = 'block';
+        check.address.innerHTML = address.value;
+        check.telephone.innerHTML = telephone.value;
+        check.secondname.innerHTML = secondname.value;
+        check.firstname.innerHTML = firstname.value;
+        check.adv.innerHTML = check.checketc(adv);
+        check.course.innerHTML = check.checketc(course);
+        checker.style.display = 'flex';
     }
 }

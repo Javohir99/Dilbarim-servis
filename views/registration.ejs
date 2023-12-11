@@ -17,9 +17,21 @@
                     <% date.students.forEach((student)=>{ %>
                     <div class="row tr">
                         <div class="col-3 text-center"><%= student.secondname + " " + student.firstname %></div>
-                        <div class="col-3 text-center"><%= student.course %></div>
+                        <div class="col-3 text-center">
+                            <% if(student.course == 'etc'){ %>
+                                <%= student.courseetc %>
+                                <% } else{ %>
+                                    <%= student.course %>
+                                    <% } %>
+                        </div>
                         <div class="col-2 text-center"><%= student.phone.slice(5) %></div>
-                        <div class="col-2 text-center"><%= student.adv %></div>
+                        <div class="col-2 text-center">
+                            <% if(student.adv == 'etc'){ %>
+                                <%= student.advetc %>
+                                <% } else{ %>  
+                                    <%= student.adv %>
+                                    <% } %>
+                        </div>
                         <div class="col-2 text-center"><%= student.data.slice(0,10) %><input type="checkbox"></div>
                     </div>
                     <% }) %>

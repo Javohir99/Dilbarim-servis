@@ -13,19 +13,16 @@ const DB = {
           console.error(err);
           return;
         }
-
         const content = buffer.slice(0, bytesRead).toString();
         const jsonData = JSON.parse(content);
         date.data = new Date().toLocaleString();
         jsonData.students.push(date);
         const updatedContent = JSON.stringify(jsonData);
-
         fs.write(fd, updatedContent, 0, (err, bytesWritten, buffer) => {
           if (err) {
             console.error(err);
             return;
           }
-
           fs.close(fd, (err) => {
             if (err) {
               console.error(err);

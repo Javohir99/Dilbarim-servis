@@ -80,6 +80,7 @@ h1{
     background:var(--select) ;
 }
 .time{
+    cursor: default;
     color: var(--border-secondory-color);
     position: fixed;
     left: 20px;
@@ -110,22 +111,18 @@ h1{
     right: 0%;
     bottom: 0%;
     background-color: var(--bg-color);
-    display: flex;
+    display: none;
     justify-content: center;
     align-items: center;
 }
 .checkinputs aside{
     border-radius: 20px;
     background-color: var(--bs-light);
-    width: 700px;
-    height: 700px;
+    width: 600px;
+    height: 600px;
     font-size: 24px;
     color: var(--border-secondory-color);
 }
 .checkinputs .row div:last-child{
     font-weight: bold;
-}
-#success,#change{
-    font-weight: bold;
-    font-size: 24px;
 }
