@@ -2,15 +2,16 @@
 <html lang="en">
     <%- include('./particle/head.ejs') %>
 <body>
+    <%- include('./particle/checkfor.ejs') %>
     <%- include('./particle/header.ejs') %>
     <main class="container-fluid">
         <div class="row normal-font">
-            <form action="/addstudent" method="post" class="col-10 offset-1 tablestart container-fluid">
+            <form action="/addstudent" method="post" id="form" class="col-10 offset-1 tablestart container-fluid">
                 <div class="row py-3">
-                    <label for="secondname" class="col-3 text-center offset-1">Фамилия</label><input type="text" name="secondname" class="col-3 offset-4">
+                    <label for="secondname" class="col-3 text-center offset-1">Фамилия</label><input type="text" name="secondname" id="secondname" class="col-3 offset-4">
                 </div>
                 <div class="row py-3">
-                    <label for="firstname" class="col-3 text-center offset-1">Имя</label><input type="text" name="firstname" class="col-3 offset-4">
+                    <label for="firstname" class="col-3 text-center offset-1">Имя</label><input type="text" name="firstname" id="firstname" class="col-3 offset-4">
                 </div>
                 <div class="row py-3">
                     <label for="phone" class="col-3 text-center offset-1">Телефон</label><input type="tel" name="phone" id="phone" class="col-3 offset-4" placeholder="+998 (99) 999-99-99">
@@ -42,10 +43,10 @@
                     </select>
                 </div>
                 <div class="row py-3">
-                    <label for="adress" class="col-3 text-center offset-1">Адресс</label><input type="text" name="adress" class="col-3 offset-4">
+                    <label for="adress" class="col-3 text-center offset-1">Адресс</label><input type="text" name="adress" id="adress" class="col-3 offset-4">
                 </div>
                 <div class="row py-3">
-                    <input type="submit" value="Saqlash" class="offset-4 col-4 p-2">
+                    <input type="button" value="Saqlash" id='btn' class="offset-4 col-4 p-2">
                 </div>
             </form>
         </div>

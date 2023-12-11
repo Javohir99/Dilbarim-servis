@@ -27,6 +27,13 @@
 .normal-font{
     font-size: 20px;
 }
+.warning{
+    width: 40px;
+    height: 40px;
+    background-image: url('/static/warning.png');
+    background-size: 100% 100%;
+    position: absolute;
+}
 header{
     font-size: 2rem;
     font-size: 32px;
@@ -95,4 +102,30 @@ h1{
     right: 20px;
     bottom: 20px;
     background: center / 55px 55px no-repeat url('/static/notification.png') var(--basic-color);
+}
+.checkinputs{
+    position: fixed;
+    top: 0%;
+    left: 0%;
+    right: 0%;
+    bottom: 0%;
+    background-color: var(--bg-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.checkinputs aside{
+    border-radius: 20px;
+    background-color: var(--bs-light);
+    width: 700px;
+    height: 700px;
+    font-size: 24px;
+    color: var(--border-secondory-color);
+}
+.checkinputs .row div:last-child{
+    font-weight: bold;
+}
+#success,#change{
+    font-weight: bold;
+    font-size: 24px;
 }

@@ -1,12 +1,20 @@
 const telephone = document.querySelector('#phone');
 const adv = document.querySelector('#adv');
 const course = document.querySelector('#course');
+const address = document.querySelector('#adress');
+const submit = document.querySelector('#btn');
+const secondname = document.querySelector('#secondname');
+const firstname = document.querySelector('#firstname');
+const form = document.querySelector('#form');
+const checker = document.querySelector('#checker');
+console.log(form);
+
 /* нужно проработать маску для телефоных номеров*/
 const mask = '+998 (__) ___-__-__';
 
 adv.addEventListener('change',etc);
 course.addEventListener('change',etc);
-
+submit.addEventListener('click',checkinput);
 telephone.addEventListener('focus',()=>{
     telephone.value = '+998 (';
 });
@@ -55,6 +63,26 @@ function etc(event){
 function rest(){
 
 }
-function empty(){
-
+function empty(block){
+    if(block.value == ''){
+        console.log('pustoy block');
+        const div = document.createElement('div');
+        div.classList.add('warning');
+        block.before(div);
+        return false;
+    }
+    else{
+        if(block.previousElementSibling.classList.contains('warning')){
+            console.log('warning have');
+            block.previousElementSibling.remove();
+            return true;
+        }
+    }
+    return true;
+}
+function checkinput(){
+    if(empty(telephone) & empty(address) & empty(secondname) & empty(firstname)){
+        console.log('form sucsses');
+        checker.style.display = 'block';
+    }
 }
