@@ -126,3 +126,8 @@ h1{
 .checkinputs .row div:last-child{
     font-weight: bold;
 }
+.reset{
+    width: 30px;
+    height: 30px;
+    background: center / 100% 100% no-repeat url('/static/rest.png');
+}
