@@ -6,8 +6,8 @@
     <main class="container-fluid">
         <div class="row normal-font">
             <div class="col-10 offset-1 tablestart">
-                <div class="row thead">
-                    <div class="col-3 text-center">Фимилия Исм</div>
+                <div class="row thead align-items-center">
+                    <div class="col-2 text-center">Фимилия Исм</div>
                     <div class="col-3 text-center">Курс</div>
                     <div class="col-2 text-center">Телефон</div>
                     <div class="col-2 text-center">Реклама</div>
@@ -15,8 +15,8 @@
                 </div>
                 <% if(date.students){ %>
                     <% date.students.forEach((student)=>{ %>
-                    <div class="row tr">
-                        <div class="col-3 text-center"><%= student.secondname + " " + student.firstname %></div>
+                    <div class="row tr align-items-center">
+                        <div class="col-2 text-center"><%= student.secondname + " " +  student.firstname %></div>
                         <div class="col-3 text-center">
                             <% if(student.course == 'etc'){ %>
                                 <%= student.courseetc %>
@@ -32,7 +32,12 @@
                                     <%= student.adv %>
                                     <% } %>
                         </div>
-                        <div class="col-2 text-center"><%= student.data.slice(0,10) %><input type="checkbox"></div>
+                        <div class="col-2 text-center"><%= student.data.slice(0,10) %></div>
+                        <div class="col-1 row g-0">
+                            <button class="btn col-4 px-0 checker"><input type="checkbox"></button>
+                            <button type="button" class="col-4 btn px-0 reset" id="reset"></button>
+                            <button type="button" class="col-4 btn px-0 delete" id="delete"></button>
+                        </div>
                     </div>
                     <% }) %>
                 <% } %>

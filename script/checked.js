@@ -1,6 +1,6 @@
 const checkbox = document.getElementsByTagName('input');
 function check(event){
-    const target = event.target.parentElement.parentElement;
+    const target = event.target.parentElement.parentElement.parentElement;
     if(event.target.checked){
         target.classList.add('chacked');
     }

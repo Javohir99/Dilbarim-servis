@@ -11,22 +11,6 @@ const success = document.querySelector('#success');
 const change = document.querySelector('#change');
 const reset = document.querySelectorAll('#reset');
 const addphone = document.querySelector('#add');
-
-/*
-                      <div class="row col-1 gx-0 py-1">
-                          <div class="col-6 reset btn" id="reset"></div>
-                          <div class="col-6 delete btn" id="delete"></div>
-                      </div>
-*/
-/*
-<div class="row py-3">
-    <input type="tel" name="phone" id="phone" class="col-3 offset-4" placeholder="+998 (99) 999-99-99">
-    <div class="row col-1 gx-0 py-1">
-        <div class="col-6 reset btn" id="reset"></div>
-        <div class="col-6 delete btn" id="add"></div>
-    </div>
-</div>
-*/
 const check = {
     firstname: document.querySelector('#check-firstname'),
     secondname: document.querySelector('#check-secondname'),
@@ -46,25 +30,31 @@ const check = {
 const mask = '+998 (__) ___-__-__';
 
 addphone.addEventListener('click', (event) => {
-    [row, label, input, innerrow] = addrow(event);
-    const del = document.createElement('div');
-    del.classList.add('col-6', 'delete', 'btn');
-
-    del.addEventListener('click', (e) => {
-        e.target.parentElement.parentElement.remove();
-    });
-    input.addEventListener('focus', phonefocus);
-    input.addEventListener('input', phoneinput);
+    if(event.target.parentElement.parentElement.nextElementSibling?.querySelector('input')?.name !== 'phone2'){
+        [row, label, input, innerrow] = addrow(event);
+        const del = document.createElement('button');
     
-    input.placeholder = "+998 (99) 999-99-99";
-    input.name = 'phone2';
-    label.innerHTML = '<i>Телефон</i>';
-
-    innerrow.append(del);
-    row.append(label);
-    row.append(input);
-    row.append(innerrow);
-    event.target.parentElement.parentElement.after(row);
+        del.addEventListener('click', (e) => {
+            e.target.parentElement.parentElement.remove();
+        });
+        input.addEventListener('focus', phonefocus);
+        input.addEventListener('input', phoneinput);
+        
+    
+        del.classList.add('col-4', 'delete', 'btn', 'offset-2');
+    
+        input.placeholder = "+998 (99) 999-99-99";
+        input.name = 'phone2';
+        label.innerHTML = '<i>Телефон</i>';
+    
+        del.setAttribute('type','button');
+    
+        innerrow.append(del);
+        row.append(label);
+        row.append(input);
+        row.append(innerrow);
+        event.target.parentElement.parentElement.after(row);
+    }
 })
 adv.addEventListener('change', etc);
 course.addEventListener('change', etc);
@@ -82,20 +72,24 @@ change.addEventListener('click', () => {
 });
 telephone.addEventListener('input', phoneinput);
 
+
+
 function addrow(event) {
     const row = document.createElement('div');
     const innerrow = document.createElement('div');
-    const res = document.createElement('div');
+    const res = document.createElement('button');
     const label = document.createElement('label');
     const input = document.createElement('input');
 
+    res.addEventListener('click', resetinput)
+
     innerrow.classList.add('row', 'col-1', 'gx-0', 'py-1');
     row.classList.add('row', 'py-3');
-    res.classList.add('col-6', 'reset', 'btn');
-    res.addEventListener('click', resetinput)
+    res.classList.add('col-4', 'reset', 'btn');
     label.classList.add('col-3', 'text-center', 'offset-1');
     input.classList.add('col-3', 'offset-4');
 
+    res.setAttribute('type','button');
     input.setAttribute('type', 'text');
     innerrow.append(res);
     return [row, label, input, innerrow];
@@ -103,8 +97,10 @@ function addrow(event) {
 function etc(event) {
     if (event.target.value == 'etc') {
         [row, label, input, innerrow] = addrow(event);
+
         input.name = event.target.name + 'etc';
         label.innerHTML = '<i>' + event.target.previousElementSibling.innerHTML + '</i>';
+        
         row.append(label);
         row.append(input);
         row.append(innerrow);
@@ -124,7 +120,6 @@ function empty(block) {
     if (block == submit) {
         return true;
     }
-    console.log(block);
     if (block.value == '') {
         const div = document.createElement('div');
         div.classList.add('warning');
@@ -141,11 +136,10 @@ function empty(block) {
 }
 function checkinput() {
     let wrong = true;
-    for (let input of document.forms[0].elements) {
+    for (let input of document.getElementsByTagName('input')) {
         wrong = (empty(input) && wrong);
     }
     if (wrong) {
-        console.log('form sucsses');
         check.address.innerHTML = address.value;
         check.telephone.innerHTML = telephone.value;
         check.secondname.innerHTML = secondname.value;

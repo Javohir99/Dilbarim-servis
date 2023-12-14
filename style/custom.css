@@ -127,7 +127,17 @@ h1{
     font-weight: bold;
 }
 .reset{
-    width: 30px;
-    height: 30px;
-    background: center / 100% 100% no-repeat url('/static/rest.png');
+    background: center / contain no-repeat url('/static/rest.png');
+}
+.add{
+    background: center / contain no-repeat url('/static/plus.png');
+}
+.delete{
+    background: center / contain no-repeat url('/static/delete.png');
+}
+.checker input{
+    width: 100%;
+    padding: 5px;
+    height: 100%;
+    cursor: pointer;
 }
