@@ -32,6 +32,12 @@ app.get('/registration', (req, res) => {
     const date = DB.ShowAll(); 
     res.render(CreatePath('registration'),{date});
 });
+app.delete('/registration/:id',(req,res)=>{
+    console.log(req.params.id);
+    DB.DeleteById(req.params.id).then(result=>{
+        res.sendStatus(200);
+    });
+})
 
 app.get('/addstudent', (req, res) => {
     res.render(CreatePath('addstudent'));

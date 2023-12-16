@@ -1,4 +1,6 @@
 const checkbox = document.getElementsByTagName('input');
+const checkbtn = document.getElementsByClassName('checker');
+
 function check(event){
     const target = event.target.parentElement.parentElement.parentElement;
     if(event.target.checked){

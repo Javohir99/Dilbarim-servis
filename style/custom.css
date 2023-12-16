@@ -135,6 +135,9 @@ h1{
 .delete{
     background: center / contain no-repeat url('/static/delete.png');
 }
+.edit{
+    background: center / contain no-repeat url('/static/edit.png');
+}
 .checker input{
     width: 100%;
     padding: 5px;

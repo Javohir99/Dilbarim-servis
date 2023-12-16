@@ -1,3 +1,4 @@
+const { json } = require('express');
 const fs = require('fs');
 /*JSON format for ragistration.json {"students":[]}*/
 const DB = {
@@ -35,6 +36,21 @@ const DB = {
   },
   ShowAll:()=>{
     return JSON.parse(fs.readFileSync(DB.DBpath,'utf-8'));    
+  },
+  DeleteById:async function(id){
+    console.log('deleted by id:' +id);
+    fs.readFile(DB.DBpath, 'utf-8',(err,data)=>{
+      if(err){
+        console.error(err);
+      }
+      jsonData = JSON.parse(data);
+      jsonData.students.splice(id,1);
+      fs.writeFile(DB.DBpath,JSON.stringify(jsonData),(err)=>{
+        if(err){
+          console.error(err);
+        }
+      })
+    })
   }
 }
 module.exports = DB;
