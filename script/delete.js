@@ -9,10 +9,11 @@ for(btn of delbtn){
 }
 window.addEventListener('beforeunload', async () => {
     IDstudents.sort((a, b) => b - a);
-    for (let i = 0; i < IDstudents.length; i++) {
-        await fetch('registration/' + IDstudents[i], {
+    const deleteRequests = IDstudents.map(async (id) => {
+        await fetch('registration/' + id, {
             method: 'DELETE'
         });
-        console.log(IDstudents[i]);
-    }
+        console.log(id);
+    });
+    await Promise.all(deleteRequests);
 });

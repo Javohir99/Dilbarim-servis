@@ -1,0 +1,2 @@
+CREATE TABLE RIGISTRATION( ID MEDIUMINT NOT NULL AUTO_INCREMENT, LastName varchar(50), FirstName varchar(50), Phone JSON, Advertising varchar(255), Adress varchar(255), Status varchar(30), Comment varchar(255), time timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP, PRIMARY KEY (ID) );
+    
