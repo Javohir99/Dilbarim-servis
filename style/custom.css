@@ -102,7 +102,7 @@ h1{
     height: 76px;
     right: 20px;
     bottom: 20px;
-    background: center / 55px 55px no-repeat url('img/static/notification.png') var(--basic-color);
+    background: center / 55px 55px no-repeat url('/img/static/notification.png') var(--basic-color);
 }
 .checkinputs{
     position: fixed;
@@ -136,7 +136,7 @@ h1{
     background: center / contain no-repeat url('/img/static/delete.png');
 }
 .edit{
-    background: center / contain no-repeat url('img/static/edit.png');
+    background: center / contain no-repeat url('/img/static/edit.png');
 }
 .checker input{
     width: 100%;

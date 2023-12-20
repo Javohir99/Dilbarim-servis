@@ -42,28 +42,62 @@ app.get('/students', (req, res) => {
 });
 
 app.get('/registration', (req, res) => {
-  res.render(CreatePath('registration'),{date});
+  connection.query(`SELECT * FROM RIGISTRATION;`,(error, results, fields)=>{
+    if(error){
+      console.log(error);
+    }
+    console.log(results);
+    res.render(CreatePath('registration'),{results});
+  });
+  
 });
 
 app.delete('/registration/:id', async (req, res) => {
+  connection.query('DELETE FROM RIGISTRATION WHERE ID=?',[req.params.id],(error,results,fields)=>{
+    if(error){
+      console.log(error);
+    }
+    res.sendStatus(200);    
+  });
+  /*
   const id = req.params.id;
   processingQueue.push(id);
 
   if (processingQueue.length === 1) {
     await processNextRequest();
-  }
+  }*/
 
-  res.sendStatus(200);
 });
 
 
 app.get('/addstudent', (req, res) => {
     res.render(CreatePath('addstudent'));
 });
+
+
 app.post('/addstudent',(req,res)=>{
-    connection.query(`INSERT RIGISTRATION(LastName,FirstName,Phone,Course,Advertising,Adress,Status) VALUES('${req.body.secondname}','${req.body.firstname}','["${req.body.phone}","${req.body.phone2}"]','${req.body.course}','${req.body.adv}','${req.body.adress}','Регистрирован');`,(err)=>{
-      console.log(err);
-    });
+    connection.query(`INSERT INTO RIGISTRATION SET 
+      LastName = ?, 
+      FirstName = ?, 
+      Phone = ?, 
+      Course = ?, 
+      Advertising=?, 
+      Adress = ?, 
+      Status=?`,
+      [
+        req.body.secondname,
+        req.body.firstname,
+        JSON.stringify([req.body.phone,req.body.phone2?req.body.phone2:'']),
+        req.body.course=='etc'?req.body.courseetc:req.body.course,
+        req.body.adv,
+        req.body.adress,
+        'Регистрирован'
+      ],
+      (err,result,fields)=>{
+      if(err){
+        console.log(err);
+      }
+    });  
     /*"INSERT (LastName,FirstName,Advertising,Adress,Status) VALUES('Shavkatov','Javoxir','Баннер','Farobiy-76','Регестрирован')";*/
     res.render(CreatePath('index'));
 });

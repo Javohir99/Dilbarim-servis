@@ -1,7 +1,6 @@
 const clock = document.querySelector('.clock');
 const date = document.querySelector('.date');
 const month = ['янаварь',"февраль","март","апрель","май","июнь","июль","август","сентябрь","октябрь","ноябрь","декабрь"];
-console.log(date);
 showdate();
 function showdate(){
     const now = new Date();
