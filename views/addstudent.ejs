@@ -28,17 +28,7 @@
                 </div>
                 <div class="row py-3">
                     <label for="course" class="col-3 text-center offset-1">Курс</label>
-                    <select id="course" name="course" class="col-3 offset-4">
-                        <option value="Компьютер">Компьютер</option>
-                        <option value="Хамширалик">Хамширалик</option>
-                        <option value="Массаж">Массаж</option>
-                        <option value="Кандолатчилик">Кандолатчилик</option>
-                        <option value="Араб тили">Араб тили</option>
-                        <option value="Тикувчилик">Тикувчилик</option>
-                        <option value="Токиш">Токиш</option>
-                        <option value="Русс тили">Русс тили</option>
-                        <option value="etc">Бошка вариант</option>
-                      </select>
+                    <select id="course" name="course" class="col-3 offset-4"><% course.forEach(element => {%><option value="<%=element%>"><%=element%></option><%}); %></select>
                 </div>
                 <div class="row py-3">
                     <label for="adv" class="col-3 text-center offset-1">Реклама</label>

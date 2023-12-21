@@ -1,8 +1,16 @@
 const express = require('express');
 const path = require('path');
 const app = express();
+const fs = require('fs');
 const PORT = 4000;
-const mysql      = require('mysql');
+const mysql = require('mysql');
+let course = '';
+fs.readFile('./date/course.json', 'utf8', (err, data) => {
+  if(err){
+    console.log(err);
+  }
+  course = JSON.parse(data);
+});
 const connection = mysql.createConnection({
   host     : 'localhost',
   user     : 'javoxir',
@@ -47,7 +55,7 @@ app.get('/registration', (req, res) => {
       console.log(error);
     }
     console.log(results);
-    res.render(CreatePath('registration'),{results});
+    res.render(CreatePath('registration'),{results,course});
   });
   
 });
@@ -71,7 +79,7 @@ app.delete('/registration/:id', async (req, res) => {
 
 
 app.get('/addstudent', (req, res) => {
-    res.render(CreatePath('addstudent'));
+    res.render(CreatePath('addstudent'),{course});
 });
 
 
@@ -87,9 +95,9 @@ app.post('/addstudent',(req,res)=>{
       [
         req.body.secondname,
         req.body.firstname,
-        JSON.stringify([req.body.phone,req.body.phone2?req.body.phone2:'']),
+        JSON.stringify([req.body.phone,req.body.phone2]),
         req.body.course=='etc'?req.body.courseetc:req.body.course,
-        req.body.adv,
+        req.body.adv == 'etc'?req.body.advetc:req.body.adv,
         req.body.adress,
         'Регистрирован'
       ],

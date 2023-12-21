@@ -149,6 +149,8 @@ function checkinput() {
         checker.style.display = 'flex';
     }
 }
+
+
 function phonefocus(event) {
     event.target.value = '+998 (';
 }
@@ -165,3 +167,39 @@ function phoneinput(event) {
             break;
     }
 }
+/*
+// Функция для применения маски к полю ввода номера телефона
+function applyPhoneMask(input) {
+    // Удаляем все символы, кроме цифр
+    const phoneNumber = input.value.replace(/\D/g, '');
+  
+    // Создаем шаблон маски
+    const mask = '+998 (##) ###-##-##';
+  
+    let maskedNumber = '';
+    let digitIndex = 0;
+  
+    // Проходимся по каждому символу шаблона маски и заменяем # на цифры из номера телефона
+    for (let i = 0; i < mask.length; i++) {
+      if (mask[i] === '#') {
+        if (digitIndex < phoneNumber.length) {
+          maskedNumber += phoneNumber[digitIndex];
+          digitIndex++;
+        } else {
+          // Если номер телефона закончился, прерываем цикл
+          break;
+        }
+      } else {
+        maskedNumber += mask[i];
+      }
+    }
+  
+    // Устанавливаем отформатированный номер телефона в поле ввода
+    input.value = maskedNumber;
+  }
+  
+  // Пример использования:
+  const phoneNumberInput = document.getElementById('phone-input');
+  phoneNumberInput.addEventListener('input', function() {
+    applyPhoneMask(this);
+  });*/

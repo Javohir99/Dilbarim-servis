@@ -3,9 +3,17 @@
     <%- include('./particle/head.ejs') %>
 <body>
     <%- include('./particle/header.ejs') %>
-    <main class="container-fluid">
+    <main class="container-fluid p-5">
+        <div class="row gy-5 normal-font col-10 offset-1">
+            <select id="course" name="course" class="col-4">
+                <option value="all">Хамма курслар</option>
+                <% course.forEach(element => {%><option value="<%=element%>"><%=element%></option><%}); %>
+            </select>
+            <input type="search" class="col-4 offset-3" id="search">
+            <button id="btn-search" class="btn btn-lg col-1 btn-primary">Qidirish!</button>
+        </div>
         <div class="row normal-font">
-            <div class="col-10 offset-1 tablestart">
+            <div class="col-10 offset-1 tablestart" id="table">
                 <div class="row thead align-items-center">
                     <div class="col-2 text-center">Фамилия Исм</div>
                     <div class="col-3 text-center">Курс</div>
@@ -17,9 +25,7 @@
                     <% for(let i = 0;i<results.length; i++){ %>
                     <div class="row tr align-items-center" data-id="<%=results[i].ID%>">
                         <div class="col-2 text-center"><%= results[i].LastName + " " +  results[i].FirstName %></div>
-                        <div class="col-3 text-center">
-                            <%= results[i].Course %>
-                        </div>
+                        <div class="col-3 text-center"><%=results[i].Course%></div>
                         <% let phone =  JSON.parse(results[i].Phone) %>
                         <div class="col-2 text-center" title="
                          <% if(phone[1]){ %>
@@ -29,7 +35,7 @@
                             <% } %>
                         "><%= phone[0].slice(5) %></div>
                         <div class="col-2 text-center">
-                                <%= results[i].Adress %>
+                                <%= results[i].Advertising %>
                         </div>
                         <div class="col-2 text-center"><%= results[i].time.toLocaleString().slice(0,10) %></div>
                         <div class="col-1 row g-0">
@@ -45,12 +51,6 @@
     </main>
     <script src="/script/checked.js"></script>
     <script src="/script/delete.js"></script>
+    <script src="/script/show.js"></script>
 </body>
 </html>
-<!--<div class="row">
-    <div class="col-3 offset-1">Шавкатов Жавохир</div>
-    <div class="col-2">Хамширалик</div>
-    <div class="col-2">(94) 608-24-42</div>
-    <div class="col-1">Инсаг</div>
-    <div class="col-2">01.12.2023</div>
-</div>-->
