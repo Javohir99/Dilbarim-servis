@@ -10,7 +10,7 @@
                 <% course.forEach(element => {%><option value="<%=element%>"><%=element%></option><%}); %>
             </select>
             <input type="search" class="col-4 offset-3" id="search">
-            <button id="btn-search" class="btn btn-lg col-1 btn-primary">Qidirish!</button>
+            <button id="btn-search" class="btn col-1 btn-primary text-center">Qidirish!</button>
         </div>
         <div class="row normal-font">
             <div class="col-10 offset-1 tablestart" id="table">
@@ -24,7 +24,7 @@
                 <% if(results){ %>
                     <% for(let i = 0;i<results.length; i++){ %>
                     <div class="row tr align-items-center" data-id="<%=results[i].ID%>">
-                        <div class="col-2 text-center"><%= results[i].LastName + " " +  results[i].FirstName %></div>
+                        <div class="col-2 text-center names"><%= results[i].LastName + " " +  results[i].FirstName %></div>
                         <div class="col-3 text-center"><%=results[i].Course%></div>
                         <% let phone =  JSON.parse(results[i].Phone) %>
                         <div class="col-2 text-center" title="

@@ -54,7 +54,6 @@ app.get('/registration', (req, res) => {
     if(error){
       console.log(error);
     }
-    console.log(results);
     res.render(CreatePath('registration'),{results,course});
   });
   
@@ -88,13 +87,13 @@ app.post('/addstudent',(req,res)=>{
       LastName = ?, 
       FirstName = ?, 
       Phone = ?, 
-      Course = ?, 
+      Course = ?,
       Advertising=?, 
       Adress = ?, 
       Status=?`,
       [
-        req.body.secondname,
-        req.body.firstname,
+        String(req.body.secondname).toLowerCase(),
+        String(req.body.firstname).toLowerCase(),
         JSON.stringify([req.body.phone,req.body.phone2]),
         req.body.course=='etc'?req.body.courseetc:req.body.course,
         req.body.adv == 'etc'?req.body.advetc:req.body.adv,

@@ -1,4 +1,4 @@
-const telephone = document.querySelector('#phone');
+const telephone = document.getElementById('phone');
 const adv = document.querySelector('#adv');
 const course = document.querySelector('#course');
 const address = document.querySelector('#adress');
@@ -11,6 +11,9 @@ const success = document.querySelector('#success');
 const change = document.querySelector('#change');
 const reset = document.querySelectorAll('#reset');
 const addphone = document.querySelector('#add');
+const header = document.querySelector('header');
+
+let focusing = true;
 const check = {
     firstname: document.querySelector('#check-firstname'),
     secondname: document.querySelector('#check-secondname'),
@@ -63,12 +66,14 @@ for (let btn of reset) {
     btn.addEventListener('click', resetinput);
 }
 
-telephone.addEventListener('focus', phonefocus);
+// telephone.addEventListener('focus', phonefocus);
 success.addEventListener('click', () => {
     form.submit();
 });
 change.addEventListener('click', () => {
     checker.style.display = 'none';
+    form.inert = false;
+    header.inert = false;
 });
 telephone.addEventListener('input', phoneinput);
 
@@ -147,15 +152,41 @@ function checkinput() {
         check.adv.innerHTML = check.checketc(adv);
         check.course.innerHTML = check.checketc(course);
         checker.style.display = 'flex';
+        form.inert = true;
+        header.inert = true;
     }
 }
 
 
-function phonefocus(event) {
-    event.target.value = '+998 (';
-}
+// function phonefocus(event) {
+//     if(focusing){
+//         console.log('focus');
+//         event.target.value = '+998 (';
+//         focusing =false;
+//     }
+// }
 function phoneinput(event) {
-    switch (event.target.value.length) {
+    const mask = "+998 (##) ###-##-##";
+    let phonenumber = '';
+    for(let i = 0; i<mask.length;i++){
+        if(mask[i]=='#'){
+            if(this.value.length<=i){
+            phonenumber+=event.data;
+            }
+            else{
+                phonenumber+=this.value[i];
+            }
+        }
+        else{
+            phonenumber += mask[i];
+        }
+        if(mask[i+1] == '#'){
+            phonenumber+=event.data;
+            break;
+        }
+    }
+    this.value = phonenumber;
+    /*    switch (event.target.value.length) {
         case 8:
             event.target.value = value = event.target.value + ') ';
             break;
@@ -166,40 +197,5 @@ function phoneinput(event) {
             event.target.value = event.target.value + '-';
             break;
     }
+    */
 }
-/*
-// Функция для применения маски к полю ввода номера телефона
-function applyPhoneMask(input) {
-    // Удаляем все символы, кроме цифр
-    const phoneNumber = input.value.replace(/\D/g, '');
-  
-    // Создаем шаблон маски
-    const mask = '+998 (##) ###-##-##';
-  
-    let maskedNumber = '';
-    let digitIndex = 0;
-  
-    // Проходимся по каждому символу шаблона маски и заменяем # на цифры из номера телефона
-    for (let i = 0; i < mask.length; i++) {
-      if (mask[i] === '#') {
-        if (digitIndex < phoneNumber.length) {
-          maskedNumber += phoneNumber[digitIndex];
-          digitIndex++;
-        } else {
-          // Если номер телефона закончился, прерываем цикл
-          break;
-        }
-      } else {
-        maskedNumber += mask[i];
-      }
-    }
-  
-    // Устанавливаем отформатированный номер телефона в поле ввода
-    input.value = maskedNumber;
-  }
-  
-  // Пример использования:
-  const phoneNumberInput = document.getElementById('phone-input');
-  phoneNumberInput.addEventListener('input', function() {
-    applyPhoneMask(this);
-  });*/
