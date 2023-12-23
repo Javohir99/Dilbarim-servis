@@ -4,28 +4,39 @@
 <body>
     <%- include('./particle/checkfor.ejs') %>
     <%- include('./particle/header.ejs') %>
+    <% student = results[0] %>
+    <% Phone = JSON.parse(student.Phone) %>
     <main class="container-fluid">
         <div class="row normal-font">
-            <form action="/addstudent" method="post" id="form" class="col-10 offset-1 tablestart container-fluid">
+            <form action="/edit/<%= student.ID %>_method=PUT" method="post" id="form" class="col-10 offset-1 tablestart container-fluid">
                 <div class="row py-3">
-                    <label for="lastname" class="col-3 text-center offset-1">Фамилия</label><input type="text" name="lastname" id="lastname" class="col-3 offset-4">
+                    <label for="lastname" class="col-3 text-center offset-1">Фамилия</label><input type="text" name="lastname" id="lastname" class="col-3 offset-4" value="<%= student.LastName %>">
                     <div class="row col-1 gx-0 py-1">
                         <button  type="button" class="col-6 reset btn" id="reset"></button>
                     </div>
                 </div>
                 <div class="row py-3">
-                    <label for="firstname" class="col-3 text-center offset-1">Имя</label><input type="text" name="firstname" id="firstname" class="col-3 offset-4">
+                    <label for="firstname" class="col-3 text-center offset-1">Имя</label><input type="text" name="firstname" id="firstname" class="col-3 offset-4" value="<%=student.FirstName %>">
                     <div class="row col-1 gx-0 py-1">
                         <button type="button" class="col-6 reset btn" id="reset"></button>
                     </div>
                 </div>
                 <div class="row py-3">
-                    <label for="phone" class="col-3 text-center offset-1">Телефон</label><input type="tel" name="phone" id="phone" class="col-3 offset-4" placeholder="+998 (99) 999-99-99">
+                    <label for="phone" class="col-3 text-center offset-1">Телефон</label><input type="tel" name="phone" id="phone" class="col-3 offset-4" placeholder="+998 (99) 999-99-99" value="<%= Phone[0] %>">
                     <div class="row col-1 gx-0 py-1">
                         <button type="button" class="col-4 reset btn" id="reset"></button>
                         <button type="button" class="col-4 offset-2 add btn" id="add"></button>
                     </div>
                 </div>
+                <% if(Phone[1]){ %>
+                    <div class="row py-3">
+                        <label class="col-3 text-center offset-1"><i>Телефон</i></label><input class="col-3 offset-4" type="text" placeholder="+998 (99) 999-99-99" name="phone2" value="<%= Phone[1] %>">
+                        <div class="row col-1 gx-0 py-1">
+                            <button class="col-4 reset btn" type="button"></button>
+                            <button class="col-4 delete btn offset-2" type="button"></button>
+                        </div>
+                    </div>
+                <% } %>
                 <div class="row py-3">
                     <label for="course" class="col-3 text-center offset-1">Курс</label>
                     <select id="course" name="course" class="col-3 offset-4"><% course.forEach(element => {%><option value="<%=element%>"><%=element%></option><%}); %></select>

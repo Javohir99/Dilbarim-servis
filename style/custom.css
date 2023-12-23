@@ -147,3 +147,7 @@ h1{
 .names{
     text-transform: capitalize;
 }
+textarea{
+    height: 36px;
+    resize: none;
+}

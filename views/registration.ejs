@@ -24,8 +24,8 @@
                 <% if(results){ %>
                     <% for(let i = 0;i<results.length; i++){ %>
                     <div class="row tr align-items-center" data-id="<%=results[i].ID%>">
-                        <div class="col-2 text-center names"><%= results[i].LastName + " " +  results[i].FirstName %></div>
-                        <div class="col-3 text-center"><%=results[i].Course%></div>
+                        <div class="col-2 text-center names" title="<%=results[i].Adress%>"><%= results[i].LastName + " " +  results[i].FirstName %></div>
+                        <div class="col-3 text-center" title="<%=results[i].Comment%>"><%=results[i].Course%></div>
                         <% let phone =  JSON.parse(results[i].Phone) %>
                         <div class="col-2 text-center" title="
                          <% if(phone[1]){ %>
@@ -40,7 +40,7 @@
                         <div class="col-2 text-center"><%= results[i].time.toLocaleString().slice(0,10) %></div>
                         <div class="col-1 row g-0">
                             <button class="btn col-4 px-0 checker" type=""><input type="checkbox"></button>
-                            <button type="button" class="col-4 btn px-0 edit" id="reset"></button>
+                            <a href="/edit/<%=results[i].ID%>"type="button" class="col-4 btn px-0 edit" id="reset"></a>
                             <button type="button" class="col-4 btn px-0 delete" id="delete"></button>
                         </div>
                     </div>

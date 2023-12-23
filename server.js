@@ -4,7 +4,10 @@ const app = express();
 const fs = require('fs');
 const PORT = 4000;
 const mysql = require('mysql');
+const methodOverride = require('method-override');
+
 let course = '';
+
 fs.readFile('./date/course.json', 'utf8', (err, data) => {
   if(err){
     console.log(err);
@@ -35,6 +38,8 @@ app.use('/style',express.static(__dirname + '/style'));
 app.use('/script', express.static(__dirname + '/script'));
 app.use('/img', express.static(__dirname + '/img'));
 
+app.use(methodOverride('_method'));
+
 app.use(express.urlencoded({extended:false}));
 
 app.get('/', (req, res) => {
@@ -59,6 +64,11 @@ app.get('/registration', (req, res) => {
   
 });
 
+app.get('/addstudent', (req, res) => {
+    res.render(CreatePath('addstudent'),{course});
+});
+
+
 app.delete('/registration/:id', async (req, res) => {
   connection.query('DELETE FROM RIGISTRATION WHERE ID=?',[req.params.id],(error,results,fields)=>{
     if(error){
@@ -66,22 +76,19 @@ app.delete('/registration/:id', async (req, res) => {
     }
     res.sendStatus(200);    
   });
-  /*
-  const id = req.params.id;
-  processingQueue.push(id);
-
-  if (processingQueue.length === 1) {
-    await processNextRequest();
-  }*/
 
 });
 
-
-app.get('/addstudent', (req, res) => {
-    res.render(CreatePath('addstudent'),{course});
-});
-
-
+app.get('/edit/:id',(req,res)=>{
+    let student;
+    connection.query(`SELECT * FROM RIGISTRATION WHERE ID = ${req.params.id};`,(error,results,fields)=>{
+      if(error){
+        console.log(error);
+      }
+      res.render(CreatePath('editstudent'),{results,course});  
+    });
+    
+})
 app.post('/addstudent',(req,res)=>{
     connection.query(`INSERT INTO RIGISTRATION SET 
       LastName = ?, 
@@ -90,22 +97,25 @@ app.post('/addstudent',(req,res)=>{
       Course = ?,
       Advertising=?, 
       Adress = ?, 
-      Status=?`,
+      Status=?,
+      Comment=?
+      `,
+      
       [
-        String(req.body.secondname).toLowerCase(),
+        String(req.body.lastname).toLowerCase(),
         String(req.body.firstname).toLowerCase(),
         JSON.stringify([req.body.phone,req.body.phone2]),
         req.body.course=='etc'?req.body.courseetc:req.body.course,
         req.body.adv == 'etc'?req.body.advetc:req.body.adv,
         req.body.adress,
-        'Регистрирован'
+        'R',
+        req.body.comment
       ],
       (err,result,fields)=>{
       if(err){
         console.log(err);
       }
     });  
-    /*"INSERT (LastName,FirstName,Advertising,Adress,Status) VALUES('Shavkatov','Javoxir','Баннер','Farobiy-76','Регестрирован')";*/
     res.render(CreatePath('index'));
 });
 

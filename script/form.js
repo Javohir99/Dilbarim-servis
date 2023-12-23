@@ -3,7 +3,7 @@ const adv = document.querySelector('#adv');
 const course = document.querySelector('#course');
 const address = document.querySelector('#adress');
 const submit = document.querySelector('#btn');
-const secondname = document.querySelector('#secondname');
+const lastname = document.querySelector('#lastname');
 const firstname = document.querySelector('#firstname');
 const form = document.querySelector('#form');
 const checker = document.querySelector('#checker');
@@ -14,7 +14,7 @@ const addphone = document.querySelector('#add');
 const header = document.querySelector('header');
 const check = {
     firstname: document.querySelector('#check-firstname'),
-    secondname: document.querySelector('#check-secondname'),
+    lastname: document.querySelector('#check-lastname'),
     address: document.querySelector('#check-adress'),
     course: document.querySelector('#check-course'),
     telephone: document.querySelector('#check-phone'),
@@ -156,7 +156,7 @@ function checkinput() {
     if (wrong) {
         check.address.innerHTML = address.value;
         check.telephone.innerHTML = telephone.value;
-        check.secondname.innerHTML = secondname.value;
+        check.lastname.innerHTML = lastname.value;
         check.firstname.innerHTML = firstname.value;
         check.adv.innerHTML = check.checketc(adv);
         check.course.innerHTML = check.checketc(course);
