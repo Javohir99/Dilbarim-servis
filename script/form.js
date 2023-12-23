@@ -1,4 +1,4 @@
-const telephone = document.getElementById('phone');
+const telephone = document.querySelector('#phone');
 const adv = document.querySelector('#adv');
 const course = document.querySelector('#course');
 const address = document.querySelector('#adress');
@@ -12,8 +12,6 @@ const change = document.querySelector('#change');
 const reset = document.querySelectorAll('#reset');
 const addphone = document.querySelector('#add');
 const header = document.querySelector('header');
-
-let focusing = true;
 const check = {
     firstname: document.querySelector('#check-firstname'),
     secondname: document.querySelector('#check-secondname'),
@@ -29,18 +27,14 @@ const check = {
     }
 }
 
-/* нужно проработать маску для телефоных номеров*/
-const mask = '+998 (__) ___-__-__';
-
 addphone.addEventListener('click', (event) => {
     if(event.target.parentElement.parentElement.nextElementSibling?.querySelector('input')?.name !== 'phone2'){
-        [row, label, input, innerrow] = addrow(event);
+        [row, label, input, innerrow] = createRow(event);
         const del = document.createElement('button');
     
         del.addEventListener('click', (e) => {
             e.target.parentElement.parentElement.remove();
         });
-        input.addEventListener('focus', phonefocus);
         input.addEventListener('input', phoneinput);
         
     
@@ -79,7 +73,7 @@ telephone.addEventListener('input', phoneinput);
 
 
 
-function addrow(event) {
+function createRow(event) {
     const row = document.createElement('div');
     const innerrow = document.createElement('div');
     const res = document.createElement('button');
@@ -101,7 +95,7 @@ function addrow(event) {
 }
 function etc(event) {
     if (event.target.value == 'etc') {
-        [row, label, input, innerrow] = addrow(event);
+        [row, label, input, innerrow] = createRow(event);
 
         input.name = event.target.name + 'etc';
         label.innerHTML = '<i>' + event.target.previousElementSibling.innerHTML + '</i>';
@@ -125,14 +119,29 @@ function empty(block) {
     if (block == submit) {
         return true;
     }
-    if (block.value == '') {
+    if(block.name == 'phone' || block.name == 'phone2'){
+        const regex = /^\+998 \(\d{2}\) \d{3}-\d{2}-\d{2}$/;
+        if (!regex.test(block.value)) {
+            console.log('KUKU!');
+            if(!block.previousElementSibling.classList.contains('warning')){
+                const div = document.createElement('div');
+                div.classList.add('warning');
+                block.before(div);
+                }
+                return false;
+            }
+    }
+    if (block.value == '')  {
+        if(!block.previousElementSibling.classList.contains('warning')){
         const div = document.createElement('div');
         div.classList.add('warning');
         block.before(div);
+        }
         return false;
     }
     else {
         if (block.previousElementSibling.classList.contains('warning')) {
+            console.log(block.previousElementSibling);
             block.previousElementSibling.remove();
             return true;
         }
@@ -157,36 +166,12 @@ function checkinput() {
     }
 }
 
-
-// function phonefocus(event) {
-//     if(focusing){
-//         console.log('focus');
-//         event.target.value = '+998 (';
-//         focusing =false;
-//     }
-// }
 function phoneinput(event) {
-    const mask = "+998 (##) ###-##-##";
-    let phonenumber = '';
-    for(let i = 0; i<mask.length;i++){
-        if(mask[i]=='#'){
-            if(this.value.length<=i){
-            phonenumber+=event.data;
-            }
-            else{
-                phonenumber+=this.value[i];
-            }
-        }
-        else{
-            phonenumber += mask[i];
-        }
-        if(mask[i+1] == '#'){
-            phonenumber+=event.data;
-            break;
-        }
-    }
-    this.value = phonenumber;
-    /*    switch (event.target.value.length) {
+    event.target.value = event.target.value.replace(/[^\d+\-()\s]/g, '');
+    switch (event.target.value.length) {
+        case 1:
+            event.target.value = value = '+998 (' + event.target.value;
+            break
         case 8:
             event.target.value = value = event.target.value + ') ';
             break;
@@ -196,6 +181,7 @@ function phoneinput(event) {
         case 16:
             event.target.value = event.target.value + '-';
             break;
+        case 20:
+            event.target.value = event.target.value.slice(0,-1);
     }
-    */
 }
