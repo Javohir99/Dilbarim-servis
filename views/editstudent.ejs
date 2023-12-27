@@ -39,8 +39,21 @@
                 <% } %>
                 <div class="row py-3">
                     <label for="course" class="col-3 text-center offset-1">Курс</label>
-                    <select id="course" name="course" class="col-3 offset-4"><% course.forEach(element => {%><option value="<%=element%>"><%=element%></option><%}); %></select>
+                    <% select = true %>
+                    <select id="course" name="course" class="col-3 offset-4"><% course.forEach(element => {%>
+                        <option value="<%=element%>" <% if(element == student.Course){%>selected<%select = false;}%>><%=element%></option><%}); %>
+                        <option value="etc" <% if (select) { %>selected<% } %>>Бошка вариант</option>
+                    </select>
                 </div>
+                <% if (select) { %>
+                    <div class="row py-3">
+                        <label class="col-3 text-center offset-1"><i>Курс</i></label>
+                        <input class="col-3 offset-4" type="text" name="courseetc" value="<%= student.Course %>">
+                        <div class="row col-1 gx-0 py-1">
+                            <button class="col-4 reset btn" type="button"></button>
+                        </div>
+                    </div>
+                <% } %>
                 <div class="row py-3">
                     <label for="adv" class="col-3 text-center offset-1">Реклама</label>
                     <select id="adv" name="adv" class="col-3 offset-4" >

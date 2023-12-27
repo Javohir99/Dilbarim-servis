@@ -55,7 +55,7 @@ app.get('/students', (req, res) => {
 });
 
 app.get('/registration', (req, res) => {
-  connection.query(`SELECT * FROM RIGISTRATION;`,(error, results, fields)=>{
+  connection.query(`SELECT * FROM REGISTRATION;`,(error, results, fields)=>{
     if(error){
       console.log(error);
     }
@@ -70,7 +70,7 @@ app.get('/addstudent', (req, res) => {
 
 
 app.delete('/registration/:id', async (req, res) => {
-  connection.query('DELETE FROM RIGISTRATION WHERE ID=?',[req.params.id],(error,results,fields)=>{
+  connection.query('DELETE FROM REGISTRATION WHERE ID=?',[req.params.id],(error,results,fields)=>{
     if(error){
       console.log(error);
     }
@@ -81,7 +81,7 @@ app.delete('/registration/:id', async (req, res) => {
 
 app.get('/edit/:id',(req,res)=>{
     let student;
-    connection.query(`SELECT * FROM RIGISTRATION WHERE ID = ${req.params.id};`,(error,results,fields)=>{
+    connection.query(`SELECT * FROM REGISTRATION WHERE ID = ${req.params.id};`,(error,results,fields)=>{
       if(error){
         console.log(error);
       }
@@ -90,7 +90,7 @@ app.get('/edit/:id',(req,res)=>{
     
 })
 app.post('/addstudent',(req,res)=>{
-    connection.query(`INSERT INTO RIGISTRATION SET 
+    connection.query(`INSERT INTO REGISTRATION SET 
       LastName = ?, 
       FirstName = ?, 
       Phone = ?, 

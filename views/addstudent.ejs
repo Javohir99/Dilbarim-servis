@@ -28,7 +28,9 @@
                 </div>
                 <div class="row py-3">
                     <label for="course" class="col-3 text-center offset-1">Курс</label>
-                    <select id="course" name="course" class="col-3 offset-4"><% course.forEach(element => {%><option value="<%=element%>"><%=element%></option><%}); %></select>
+                    <select id="course" name="course" class="col-3 offset-4"><% course.forEach(element => {%><option value="<%=element%>"><%=element%></option><%}); %>
+                    <option value="etc">Бошка вариант</option>
+                    </select>
                 </div>
                 <div class="row py-3">
                     <label for="adv" class="col-3 text-center offset-1">Реклама</label>
