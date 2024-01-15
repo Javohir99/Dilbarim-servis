@@ -6,9 +6,9 @@
     <%- include('./particle/header.ejs') %>
     <% student = results[0] %>
     <% Phone = JSON.parse(student.Phone) %>
-    <main class="container-fluid">
+    <main class="container-fluid py-5">
         <div class="row normal-font">
-            <form action="/edit/<%= student.ID %>_method=PUT" method="post" id="form" class="col-10 offset-1 tablestart container-fluid">
+            <form action="/edit/<%= student.ID %>?_method=PUT" method="post" id="form" class="col-10 offset-1 tablestart container-fluid">
                 <div class="row py-3">
                     <label for="lastname" class="col-3 text-center offset-1">Фамилия</label><input type="text" name="lastname" id="lastname" class="col-3 offset-4" value="<%= student.LastName %>">
                     <div class="row col-1 gx-0 py-1">
@@ -54,26 +54,33 @@
                         </div>
                     </div>
                 <% } %>
+                <% advselected = true %>
                 <div class="row py-3">
                     <label for="adv" class="col-3 text-center offset-1">Реклама</label>
                     <select id="adv" name="adv" class="col-3 offset-4" >
-                        <option value="Таниш">Таниш</option>
-                        <option value="Баннер">Баннер</option>
-                        <option value="Instagram">Instagram</option>
-                        <option value="YouTube">YouTube</option>
-                        <option value="Telegramm">Telegramm</option>
-                        <option value="Флаер">Флаер</option>
-                        <option value="etc">Бошка вариант</option>
+                        <% Adver.forEach(element=>{%><option value="<%=element%>"<% if (element == student.Advertising) { %>selected<% advselected = false %><% } %>    
+                            ><%=element%></option>
+                        <%})%>
+                        <option value="etc" <% if (advselected) { %>selected<% } %>>Бошка вариант</option>
                     </select>
                 </div>
+                <% if (advselected) { %>
+                    <div class="row py-3">
+                        <label class="col-3 text-center offset-1"><i>Реклама</i></label>
+                        <input class="col-3 offset-4" type="text" name="advetc" value="<%=student.Advertising%>">
+                        <div class="row col-1 gx-0 py-1">
+                            <button class="col-4 reset btn" type="button"></button>
+                        </div>
+                    </div>
+                <% } %>
                 <div class="row py-3">
-                    <label for="adress" class="col-3 text-center offset-1">Адресс</label><input type="text" name="adress" id="adress" class="col-3 offset-4">
+                    <label for="adress" class="col-3 text-center offset-1">Адресс</label><input type="text" name="adress" id="adress" class="col-3 offset-4" value="<%=student.Adress%>">
                     <div class="row col-1 gx-0 py-1">
                         <button type="button" class="col-6 reset btn" id="reset"></button>
                     </div>
                 </div>
                 <div class="row py-3">
-                    <label for="adress" class="col-3 text-center offset-1">Комментария</label><textarea type="text" name="comment" id="comment" class="col-3 offset-4"></textarea>
+                    <label for="adress" class="col-3 text-center offset-1">Комментария</label><textarea type="text" name="comment" id="comment" class="col-3 offset-4"><%=student.Comment%></textarea>
                     <div class="row col-1 gx-0 py-1">
                         <button type="button" class="col-6 reset btn" id="reset"></button>
                     </div>

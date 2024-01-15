@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+    <%- include('./particle/head.ejs') %>
+<body>
+    <%- include('./particle/header.ejs') %>
+    <main class="container-fluid py-5">
+        <div class="row gy-5 normal-font col-10 offset-1">
+            <select id="course" name="course" class="col-4">
+                <option value="all">Хамма курслар</option>
+                <% course.forEach(element => {%><option value="<%=element%>"><%=element%></option><%}); %>
+            </select>
+        </div>
+        <% Groups.forEach(group =>{%>
+        <div class="row normal-font py-5" data-id="<%=group.ID%>">
+            <div class="col-10 offset-1 tablestart" id="table">
+                <div class="row thead align-items-center">
+                    <div class="col-12 text-center py-4"><%= group.Course%></div>
+                    <div class="col-6 text-center"><% times = JSON.parse(group.Times)%>
+                        <%for(day in times){%>
+                            <%=day + " " + times[day]%>
+                        <%}%>
+                    </div>
+                    <div class="col-3 text-center"><%= group.TimeStart.toLocaleString().slice(0,10)%></div>
+                    <div class="col-3 text-center"></div>
+
+                </div>
+                    <% for(let i = 0;i<results.length; i++){ %>
+                    <%if(results[i].GROUPID == group.ID){%>
+                        <div class="row tr align-items-center <%=results[i].Status %>" data-id="<%=results[i].ID%>">
+                            <div class="col-4 names" title="<%=results[i].Adress%>"><%= results[i].LastName + " " +  results[i].FirstName %></div>
+                            <% let phone =  JSON.parse(results[i].Phone) %>
+                            <div class="col-4 text-center" title="
+                             <% if(phone[1]){ %>
+                                <%= phone[1].slice(5) %>
+                                <% }else{ %>
+                                <%= 'ikkinchi nomer berilmagan' %>
+                                <% } %>
+                            "><%= phone[0].slice(5) %></div>
+                            <div class="col-4 row g-0 p-0">
+                                <a href="/edit/<%=results[i].ID%>"type="button" class="col-4 btn p-3 edit" id="reset"></a>
+                            </div>
+                        </div>
+                    <%}%>
+                <% } %>
+            </div>
+        </div>
+        <%})%>
+    </main>
+</body>
+</html>

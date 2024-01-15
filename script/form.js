@@ -122,7 +122,6 @@ function empty(block) {
     if(block.name == 'phone' || block.name == 'phone2'){
         const regex = /^\+998 \(\d{2}\) \d{3}-\d{2}-\d{2}$/;
         if (!regex.test(block.value)) {
-            console.log('KUKU!');
             if(!block.previousElementSibling.classList.contains('warning')){
                 const div = document.createElement('div');
                 div.classList.add('warning');

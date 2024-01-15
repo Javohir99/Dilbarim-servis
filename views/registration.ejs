@@ -3,7 +3,7 @@
     <%- include('./particle/head.ejs') %>
 <body>
     <%- include('./particle/header.ejs') %>
-    <main class="container-fluid p-5">
+    <main class="container-fluid py-5">
         <div class="row gy-5 normal-font col-10 offset-1">
             <select id="course" name="course" class="col-4">
                 <option value="all">Хамма курслар</option>
@@ -12,6 +12,19 @@
             <input type="search" class="col-4 offset-3" id="search">
             <button id="btn-search" class="btn col-1 btn-primary text-center">Qidirish!</button>
         </div>
+        <div class="row py-5 col-10 offset-1">
+            <div class="btn-group col-8" role="group" aria-label="Basic radio toggle button group">
+                <input type="radio" class="btn-check" name="btnradio" id="btnradio1" value='R' autocomplete="off" checked>
+                <label class="btn btn-outline-primary text-center normal-font" for="btnradio1">Йозилганлар</label>
+              
+                <input type="radio" class="btn-check" name="btnradio" id="btnradio2" value='O' autocomplete="off">
+                <label class="btn btn-outline-primary text-center normal-font" for="btnradio2">Окивотканлар</label>
+              
+                <input type="radio" class="btn-check" name="btnradio" id="btnradio3" value='D' autocomplete="off">
+                <label class="btn btn-outline-primary text-center normal-font" for="btnradio3">Очирилганлар</label>
+              </div>
+            <button class="col-2 offset-2 btn btn-success text-center normal-font" id="create">Группа яратиш</button>
+            </div>
         <div class="row normal-font">
             <div class="col-10 offset-1 tablestart" id="table">
                 <div class="row thead align-items-center">
@@ -23,7 +36,7 @@
                 </div>
                 <% if(results){ %>
                     <% for(let i = 0;i<results.length; i++){ %>
-                    <div class="row tr align-items-center" data-id="<%=results[i].ID%>">
+                    <div class="row tr align-items-center <%=results[i].Status %>" data-id="<%=results[i].ID%>">
                         <div class="col-2 text-center names" title="<%=results[i].Adress%>"><%= results[i].LastName + " " +  results[i].FirstName %></div>
                         <div class="col-3 text-center" title="<%=results[i].Comment%>"><%=results[i].Course%></div>
                         <% let phone =  JSON.parse(results[i].Phone) %>
@@ -38,10 +51,16 @@
                                 <%= results[i].Advertising %>
                         </div>
                         <div class="col-2 text-center"><%= results[i].time.toLocaleString().slice(0,10) %></div>
-                        <div class="col-1 row g-0">
-                            <button class="btn col-4 px-0 checker" type=""><input type="checkbox"></button>
-                            <a href="/edit/<%=results[i].ID%>"type="button" class="col-4 btn px-0 edit" id="reset"></a>
-                            <button type="button" class="col-4 btn px-0 delete" id="delete"></button>
+                        <div class="col-1 row g-0 p-0">
+                            <% if (results[i].Status == 'R') { %>
+                                <button class="btn col-4 px-0 checker" type=""><input type="checkbox" class="select"></button>
+                            <% }%>
+                            <a href="/edit/<%=results[i].ID%>"type="button" class="col-4 btn p-3 edit" id="reset"></a>
+                            <% if (results[i].Status == 'R') { %>
+                            <button type="button" class="col-4 btn p-3 delete" id="delete"></button>
+                            <% } else if (results[i].Status == 'D') { %>
+                            <button type="button" class="col-4 btn p-3 restore" id="restore"></button>
+                            <% } %>
                         </div>
                     </div>
                     <% } %>
@@ -49,8 +68,62 @@
             </div>
         </div>
     </main>
-    <script src="/script/checked.js"></script>
-    <script src="/script/delete.js"></script>
+    <section class="checkinputs" id="checker">
+        <aside>
+            <div class="row py-3">
+                <div class="col-12 text-center">Коментария</div>
+                <textarea name="commnet" id="comment" class="col-10 offset-1 comment"></textarea>
+            </div>
+            <div class="contaitner-fluid">
+                <div class="row py-3">
+                    <button class="col-3 text-center offset-1 btn-outline-success btn py-3 btn-lg" id="success">Саклаш</button>
+                    <button class="col-3 text-center offset-4 btn-outline-warning btn py-3 btn-lg" id="change">Бекор килиш</button>
+                </div>
+            </div>
+        </aside>
+    </section>
+    <section class="checkinputs" id="addgroup">
+        <aside>
+            <div class="row py-3">
+                <h2 class="col-12 text-center p-5">Хафта кунлари</h2>
+                <div class="btn-group col-10 offset-1" role="group" aria-label="Basic checkbox toggle button group">
+                    <input type="checkbox" class="btn-check" name="btncheck" id="btncheck1" value="mon" autocomplete="off">
+                    <label class="btn btn-outline-primary" for="btncheck1">ПН</label>
+                  
+                    <input type="checkbox" class="btn-check" name="btncheck" id="btncheck2" value="tue" autocomplete="off">
+                    <label class="btn btn-outline-primary" for="btncheck2">ВТ</label>
+                  
+                    <input type="checkbox" class="btn-check" name="btncheck" id="btncheck3" value="wed" autocomplete="off">
+                    <label class="btn btn-outline-primary" for="btncheck3">СР</label>
+
+                    <input type="checkbox" class="btn-check" name="btncheck" id="btncheck4" value="thu" autocomplete="off">
+                    <label class="btn btn-outline-primary" for="btncheck4">ЧТ</label>
+
+                    <input type="checkbox" class="btn-check" name="btncheck" id="btncheck5" value="fri" autocomplete="off">
+                    <label class="btn btn-outline-primary" for="btncheck5">ПТ</label>
+
+                    <input type="checkbox" class="btn-check" name="btncheck" id="btncheck6" value="sat" autocomplete="off">
+                    <label class="btn btn-outline-primary" for="btncheck6">СБ</label>
+
+                    <input type="checkbox" class="btn-check" name="btncheck" id="btncheck7" value="sun" autocomplete="off">
+                    <label class="btn btn-outline-primary" for="btncheck7">ВС</label>
+                </div>
+            </div>
+           <div class="container-fluid timecontainer" id="time">
+                <div class="row py-3">
+                    <h2 class="col-12 text-center p-5">Соатлари</h2>
+                </div>
+           </div>
+            <div class="contaitner-fluid">
+                <div class="row py-3">
+                    <button class="col-3 text-center offset-1 btn-outline-success btn py-3 btn-lg" id="successtime">Саклаш</button>
+                    <button class="col-3 text-center offset-4 btn-outline-warning btn py-3 btn-lg" id="changetime">Бекор килиш</button>
+                </div>
+            </div>
+        </aside>
+    </section>
+    <script src="/script/creategroup.js"></script>
+    <script src="/script/changestatus.js"></script>
     <script src="/script/show.js"></script>
 </body>
 </html>

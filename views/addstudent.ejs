@@ -4,7 +4,7 @@
 <body>
     <%- include('./particle/checkfor.ejs') %>
     <%- include('./particle/header.ejs') %>
-    <main class="container-fluid">
+    <main class="container-fluid py-5">
         <div class="row normal-font">
             <form action="/addstudent" method="post" id="form" class="col-10 offset-1 tablestart container-fluid">
                 <div class="row py-3">
@@ -35,12 +35,7 @@
                 <div class="row py-3">
                     <label for="adv" class="col-3 text-center offset-1">Реклама</label>
                     <select id="adv" name="adv" class="col-3 offset-4" >
-                        <option value="Таниш">Таниш</option>
-                        <option value="Баннер">Баннер</option>
-                        <option value="Instagram">Instagram</option>
-                        <option value="YouTube">YouTube</option>
-                        <option value="Telegramm">Telegramm</option>
-                        <option value="Флаер">Флаер</option>
+                        <% Adver.forEach(element => {%><option value="<%=element%>"><%=element%></option><%}); %>
                         <option value="etc">Бошка вариант</option>
                     </select>
                 </div>

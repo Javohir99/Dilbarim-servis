@@ -52,7 +52,7 @@ a{
     color: #fff;
 }
 .tablestart{
-    margin: 44px auto;
+    margin: 0px auto;
     border-radius: 20px;
     background: var(--bg-color);
 }
@@ -135,6 +135,9 @@ h1{
 .delete{
     background: center / contain no-repeat url('/img/static/delete.png');
 }
+.restore{
+    background: center / contain no-repeat url('/img/static/restore.png');
+}
 .edit{
     background: center / contain no-repeat url('/img/static/edit.png');
 }
@@ -150,4 +153,7 @@ h1{
 textarea{
     height: 36px;
     resize: none;
+}
+.timecontainer{
+    max-height: 360px;
 }
